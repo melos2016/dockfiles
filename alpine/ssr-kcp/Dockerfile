@@ -1,8 +1,8 @@
-FROM alpine:edge
+FROM imelos/alpine:sshd
 
 MAINTAINER Melos
 
-ENV KCP_VERSON=20161118
+ENV KCP_VERSON 20161118
 
 RUN apk update \
     && apk add python libsodium unzip wget \
@@ -31,8 +31,8 @@ ADD kcptun.json /kcptun.json
 
 COPY supervisord.conf /etc/supervisord.conf
 
-ADD start.sh /start.sh
-RUN chmod +x /start.sh
+ADD docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
 
-EXPOSE 8388/tcp 18388/udp
-ENTRYPOINT ["/start.sh"]
+EXPOSE 8388/tcp 18388/udp 22
+ENTRYPOINT ["/docker-entrypoint.sh"]

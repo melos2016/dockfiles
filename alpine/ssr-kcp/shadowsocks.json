@@ -6,13 +6,14 @@
     "local_port": 1080,
     "password": "123456",
     "timeout": 120,
+    "udp_timeout": 60,
     "method": "chacha20-ietf",
     "protocol": "auth_aes128_md5_compatible",
     "protocol_param": "",
     "obfs": "tls1.2_ticket_auth_compatible",
     "obfs_param": "",
-    "redirect": "",
     "dns_ipv6": false,
-    "fast_open": false,
-    "workers": 1
+    "connect_verbose_info": 0,
+    "redirect": "",
+    "fast_open": false
 }
