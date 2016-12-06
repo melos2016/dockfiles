@@ -1,4 +1,4 @@
-FROM imelos/alpine:sshd
+FROM imelos/alpine-sshd
 
 MAINTAINER Melos
 

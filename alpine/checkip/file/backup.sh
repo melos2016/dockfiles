@@ -17,7 +17,7 @@ OldCheckipName=$(date -d $(date +%Y-%m-%d)-240 +%Y%m%d).tar.gz
  
 #压缩扫描数据
 cd $CHECKIP_DIR
-tar zcf $LOCAL_BAK_DIR/$CheckipName ./*
+tar zcf $LOCAL_BAK_DIR/$CheckipName ip_*.txt
  
 cd /
 #开始上传

@@ -1,9 +1,19 @@
-FROM imelos/alpine:python2
+FROM imelos/alpine-sshd
 
 MAINTAINER Melos
 
+RUN apk add --update --no-cache \
+              musl \
+              build-base \
+              bash \
+              git \
+              python \
+              python-dev \
+              py-pip
+
 RUN apk add --update --no-cache curl libffi-dev openssl-dev\
 	&& pip install --upgrade pip \
+	&& pip install gevent \
 	&& pip install pyopenssl \
 	&& rm -r /root/.cache \
 	&& rm -rf /var/cache/apk/*
