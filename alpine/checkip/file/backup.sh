@@ -18,10 +18,12 @@ OldCheckipName=$(date -d $(date +%Y-%m-%d)-240 +%Y%m%d).tar.gz
 #压缩扫描数据
 cd $CHECKIP_DIR
 tar zcf $LOCAL_BAK_DIR/$CheckipName ip_*.txt
+cp $LOCAL_BAK_DIR/$CheckipName $LOCAL_BAK_DIR/checkip.tar.gz
  
 cd /
 #开始上传
 bash /dropbox_uploader.sh upload $LOCAL_BAK_DIR/$CheckipName $DROPBOX_DIR/$CheckipName
+bash /dropbox_uploader.sh upload $LOCAL_BAK_DIR/checkip.tar.gz $DROPBOX_DIR/checkip.tar.gz
  
 #删除旧数据
 rm -rf $LOCAL_BAK_DIR/$OldCheckipName

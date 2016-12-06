@@ -67,9 +67,9 @@ g_maxhandleipcnt = 9999999
 #检查IP的线程数
 g_maxthreads = 70
 #是否立即检查上一次的google ip列表
-g_checklastgoogleipfirst = 0
+g_checklastgoogleipfirst = 1
 #结束时是否需要对ip_tmpok.txt里面的结果进行排序
-g_needsorttmpokfile = 0
+g_needsorttmpokfile = 1
 
 "连接超时设置"
 g_conntimeout = 5
@@ -1122,4 +1122,5 @@ if __name__ == '__main__':
                     if os.path.exists("ip_tmpok-%s.txt" % i): move_over("ip_tmpok-%s.txt" % i, "tmp/")
                     if os.path.exists("googleip-%s.txt" % i): os.remove("googleip-%s.txt" % i)
             elif j == n and i == 0:
+            	sort_tmpokfile(0)
                 list_ping()
