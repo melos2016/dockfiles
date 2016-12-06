@@ -11,7 +11,7 @@ RUN apk add --update --no-cache \
               python-dev \
               py-pip
 
-RUN apk add --update --no-cache curl libffi-dev openssl-dev\
+RUN apk add --update --no-cache curl libffi-dev openssl openssl-dev\
 	&& pip install --upgrade pip \
 	&& pip install gevent \
 	&& pip install pyopenssl \
