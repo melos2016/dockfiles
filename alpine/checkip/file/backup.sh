@@ -27,6 +27,6 @@ bash /dropbox_uploader.sh upload $LOCAL_BAK_DIR/checkip.tar.gz $DROPBOX_DIR/chec
  
 #删除旧数据
 rm -rf $LOCAL_BAK_DIR/$OldCheckipName
-bash /dropbox_uploader.sh delete $Old_DROPBOX_DIR
+bash /dropbox_uploader.sh delete $DROPBOX_DIR/$OldCheckipName
  
 echo -e "Backup Done!"
