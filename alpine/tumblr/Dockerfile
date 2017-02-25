@@ -25,7 +25,7 @@ COPY file /
 
 RUN chmod +x /docker-entrypoint.sh \
 	&& chmod +x /backup.sh \
-	&& chmod +x /docker-entrypoint.sh  \
+	&& chmod +x /dropbox_uploader.sh  \
 	&& chmod 700 /root 
 
 EXPOSE 22 

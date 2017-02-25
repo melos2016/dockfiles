@@ -1,5 +1,5 @@
 #!/bin/bash
- ps -ef | grep tumblr | awk '{ print $1 }'|xargs kill -9
+ ps -ef | grep tumblrdb | awk '{ print $1 }'|xargs kill -9
 
 # 定义需要备份的目录
 #NGINX_CONF_DIR=/usr/local/nginx/conf  # nginx配置目录
@@ -18,21 +18,18 @@ OldTumblrName=$(date -d $(date +%Y-%m-%d)-240 +%Y%m%d).tar.gz
  
 #压缩扫描数据
 cd $TUMBLR_DIR
-tar zcf $LOCAL_BAK_DIR/$TumblrName tumblr.db
-cp $LOCAL_BAK_DIR/$TumblrName $LOCAL_BAK_DIR/tumblr.tar.gz
+tar zcf $LOCAL_BAK_DIR/tumblr.tar.gz tumblr.db
  
 cd /
 #开始上传
 bash /dropbox_uploader.sh upload $LOCAL_BAK_DIR/tumblr.tar.gz $DROPBOX_DIR/tumblr.tar.gz
-bash /dropbox_uploader.sh delete $DROPBOX_DIR/$TumblrName
-bash /dropbox_uploader.sh copy $DROPBOX_DIR/tumblr.tar.gz $DROPBOX_DIR/$TumblrName
  
 #删除旧数据
 rm -rf $LOCAL_BAK_DIR/$OldTumblrName
 bash /dropbox_uploader.sh delete $DROPBOX_DIR/$OldTumblrName
 
+echo -e "Backup Done!"
+
 cd /root/tumblr
 
 python /root/tumblr/tumblrdb.py
-
-echo -e "Backup Done!"
