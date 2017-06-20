@@ -2,7 +2,7 @@ FROM imelos/alpine-sshd
 
 MAINTAINER Melos
 
-ENV KCP_VERSON 20161202
+ENV KCP_VERSON 20170525
 
 RUN apk update \
     && apk add python libsodium unzip wget libnet-dev libpcap-dev git g++
@@ -12,13 +12,12 @@ RUN mkdir /ssr \
     && cd /ssr \
     && wget --no-check-certificate https://github.com/breakwa11/shadowsocks/archive/manyuser.zip -O /tmp/manyuser.zip \
     && unzip -d /tmp /tmp/manyuser.zip \
-    && mv /tmp/shadowsocks-manyuser/shadowsocks /ssr/shadowsocks \
+    && mv /tmp/shadowsocksr-manyuser/shadowsocks /ssr/shadowsocks \
     && rm -rf /tmp/*
 
 ADD shadowsocks.json /shadowsocks.json
 
-RUN \
-    apk add --no-cache --virtual .build-deps curl \
+RUN apk add --no-cache --virtual .build-deps curl \
     && mkdir -p /opt/kcptun \
     && cd /opt/kcptun \
     && curl -fSL https://github.com/xtaci/kcptun/releases/download/v${KCP_VERSON}/kcptun-linux-amd64-${KCP_VERSON}.tar.gz | tar xz \
