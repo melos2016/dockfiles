@@ -2,7 +2,7 @@ FROM imelos/alpine-sshd
 
 MAINTAINER Melos
 
-ENV KCP_VERSON 20161118
+ENV KCP_VERSON 20170525
 
 RUN apk update \
     && apk add python libsodium unzip wget \
@@ -17,8 +17,7 @@ RUN mkdir /ssr \
 
 ADD shadowsocks.json /shadowsocks.json
 
-RUN \
-    apk add --no-cache --virtual .build-deps curl \
+RUN  apk add --no-cache --virtual .build-deps curl \
     && mkdir -p /opt/kcptun \
     && cd /opt/kcptun \
     && curl -fSL https://github.com/xtaci/kcptun/releases/download/v${KCP_VERSON}/kcptun-linux-amd64-${KCP_VERSON}.tar.gz | tar xz \
