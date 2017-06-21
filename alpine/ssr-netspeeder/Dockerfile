@@ -1,14 +1,21 @@
-FROM imelos/alpine-sshd
-
-MAINTAINER Melos
+FROM alpine
 
 ENV KCP_VERSON 20170525
 
 RUN apk update \
-    && apk add python libsodium unzip wget libnet-dev libpcap-dev git g++
+    && apk add --no-cache python libsodium unzip wget libnet-dev libpcap-dev git g++ ca-certificates openssh supervisor pwgen bash tzdata
 
+ADD file /
 
-RUN mkdir /ssr \
+RUN  chmod +x /docker-entrypoint.sh  \
+    && rm -rf /var/cache/apk/*  \
+    && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && echo "Asia/Shanghai" > /etc/timezone \
+    && ssh-keygen -A  \
+    && chmod 700 /root \
+    && chmod 700 /root/.ssh \
+    && chmod 600 /root/.ssh/authorized_keys \
+    && mkdir /ssr \
     && cd /ssr \
     && wget --no-check-certificate https://github.com/breakwa11/shadowsocks/archive/manyuser.zip -O /tmp/manyuser.zip \
     && unzip -d /tmp /tmp/manyuser.zip \
