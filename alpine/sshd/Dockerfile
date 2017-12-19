@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-MAINTAINER Melos
+LABEL MAINTAINER="Melos"
 
 RUN apk add --update --no-cache ca-certificates openssh supervisor pwgen bash tzdata \
 	&& rm -rf /var/cache/apk/*  \
