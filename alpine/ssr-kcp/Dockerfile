@@ -4,8 +4,7 @@ MAINTAINER Melos
 
 ENV KCP_VERSON 20171201
 
-RUN apk update \
-    && apk add python libsodium unzip wget \
+RUN apk add --update --no-cache python libsodium unzip wget \
     && rm -rf /var/cache/apk/* \
     && mkdir /ssr \
     && cd /ssr \
