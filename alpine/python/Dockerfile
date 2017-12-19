@@ -9,9 +9,10 @@ RUN apk add --update --no-cache \
               git \
               python \
               python-dev \
-              py-pip
-
-RUN pip install --upgrade pip \
+              py-pip \
+    && pip install --upgrade pip \
 	&& pip install gevent \
 	&& rm -r /root/.cache \
 	&& rm -rf /var/cache/apk/*
+
+

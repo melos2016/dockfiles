@@ -1,5 +1,8 @@
 #!/bin/sh
 
+chmod +x /backup.sh
+chmod +x /dropbox_uploader.sh
+
 sh /run.sh
 
 

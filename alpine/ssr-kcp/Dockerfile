@@ -2,22 +2,18 @@ FROM imelos/alpine-sshd
 
 MAINTAINER Melos
 
-ENV KCP_VERSON 20170525
+ENV KCP_VERSON 20171201
 
 RUN apk update \
     && apk add python libsodium unzip wget \
-    && rm -rf /var/cache/apk/*
-
-RUN mkdir /ssr \
+    && rm -rf /var/cache/apk/* \
+    && mkdir /ssr \
     && cd /ssr \
-    && wget --no-check-certificate https://github.com/breakwa11/shadowsocks/archive/manyuser.zip -O /tmp/manyuser.zip \
+    && wget --no-check-certificate https://github.com/shadowsocksr-backup/shadowsocksr/archive/manyuser.zip -O /tmp/manyuser.zip \
     && unzip -d /tmp /tmp/manyuser.zip \
     && mv /tmp/shadowsocksr-manyuser/shadowsocks /ssr/shadowsocks \
-    && rm -rf /tmp/*
-
-ADD shadowsocks.json /shadowsocks.json
-
-RUN  apk add --no-cache --virtual .build-deps curl \
+    && rm -rf /tmp/* \
+    && apk add --no-cache --virtual .build-deps curl \
     && mkdir -p /opt/kcptun \
     && cd /opt/kcptun \
     && curl -fSL https://github.com/xtaci/kcptun/releases/download/v${KCP_VERSON}/kcptun-linux-amd64-${KCP_VERSON}.tar.gz | tar xz \
@@ -26,12 +22,7 @@ RUN  apk add --no-cache --virtual .build-deps curl \
     && apk del .build-deps \
     && apk add --no-cache supervisor
 	
-ADD kcptun.json /kcptun.json
-
-COPY supervisord.conf /etc/supervisord.conf
-
-ADD docker-entrypoint.sh /docker-entrypoint.sh
-RUN chmod +x /docker-entrypoint.sh
+ADD file /
 
 EXPOSE 8388/tcp 18388/udp 22
 ENTRYPOINT ["/docker-entrypoint.sh"]

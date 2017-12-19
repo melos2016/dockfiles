@@ -1,7 +1,5 @@
-#!/bin/bash
+#!/bin/sh
 
 sh /run.sh
-
-/mysql.sh mysqld
 
 /usr/bin/supervisord
